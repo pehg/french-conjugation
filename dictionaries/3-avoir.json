@@ -1,0 +1,164 @@
+{
+    "avoir": {
+        "Indicatif Pr\u00e9sent": {
+            "je": "j'ai",
+            "tu": "tu as",
+            "il": "il a",
+            "elle": "elle a",
+            "nous": "nous avons",
+            "vous": "vous avez",
+            "ils": "ils ont",
+            "elles": "elles ont"
+        },
+        "Indicatif Imparfait": {
+            "je": "j'avais",
+            "tu": "tu avais",
+            "il": "il avait",
+            "elle": "elle avait",
+            "nous": "nous avions",
+            "vous": "vous aviez",
+            "ils": "ils avaient",
+            "elles": "elles avaient"
+        },
+        "Indicatif Futur": {
+            "je": "j'aurai",
+            "tu": "tu auras",
+            "il": "il aura",
+            "elle": "elle aura",
+            "nous": "nous aurons",
+            "vous": "vous aurez",
+            "ils": "ils auront",
+            "elles": "elles auront"
+        },
+        "Indicatif Pass\u00e9 simple": {
+            "je": "j'eus",
+            "tu": "tu eus",
+            "il": "il eut",
+            "elle": "elle eut",
+            "nous": "nous e\u00fbmes",
+            "vous": "vous e\u00fbtes",
+            "ils": "ils eurent",
+            "elles": "elles eurent"
+        },
+        "Indicatif Pass\u00e9 compos\u00e9": {
+            "je": "j'ai eu",
+            "tu": "tu as eu",
+            "il": "il a eu",
+            "elle": "elle a eu",
+            "nous": "nous avons eu",
+            "vous": "vous avez eu",
+            "ils": "ils ont eu",
+            "elles": "elles ont eu"
+        },
+        "Indicatif Plus-que-parfait": {
+            "je": "j'avais eu",
+            "tu": "tu avais eu",
+            "il": "il avait eu",
+            "elle": "elle avait eu",
+            "nous": "nous avions eu",
+            "vous": "vous aviez eu",
+            "ils": "ils avaient eu",
+            "elles": "elles avaient eu"
+        },
+        "Indicatif Pass\u00e9 ant\u00e9rieur": {
+            "je": "j'eus eu",
+            "tu": "tu eus eu",
+            "il": "il eut eu",
+            "elle": "elle eut eu",
+            "nous": "nous e\u00fbmes eu",
+            "vous": "vous e\u00fbtes eu",
+            "ils": "ils eurent eu",
+            "elles": "elles eurent eu"
+        },
+        "Indicatif Futur ant\u00e9rieur": {
+            "je": "j'aurai eu",
+            "tu": "tu auras eu",
+            "il": "il aura eu",
+            "elle": "elle aura eu",
+            "nous": "nous aurons eu",
+            "vous": "vous aurez eu",
+            "ils": "ils auront eu",
+            "elles": "elles auront eu"
+        },
+        "Subjonctif Pr\u00e9sent": {
+            "je": "que j'aie",
+            "tu": "que tu aies",
+            "il": "qu'il ait",
+            "elle": "qu'elle ait",
+            "nous": "que nous ayons",
+            "vous": "que vous ayez",
+            "ils": "qu'ils aient",
+            "elles": "qu'elles aient"
+        },
+        "Subjonctif Imparfait": {
+            "je": "que j'eusse",
+            "tu": "que tu eusses",
+            "il": "qu'il e\u00fbt",
+            "elle": "qu'elle e\u00fbt",
+            "nous": "que nous eussions",
+            "vous": "que vous eussiez",
+            "ils": "qu'ils eussent",
+            "elles": "qu'elles eussent"
+        },
+        "Subjonctif Plus-que-parfait": {
+            "je": "que j'eusse eu",
+            "tu": "que tu eusses eu",
+            "il": "qu'il e\u00fbt eu",
+            "elle": "qu'elle e\u00fbt eu",
+            "nous": "que nous eussions eu",
+            "vous": "que vous eussiez eu",
+            "ils": "qu'ils eussent eu",
+            "elles": "qu'elles eussent eu"
+        },
+        "Subjonctif Pass\u00e9": {
+            "je": "que j'aie eu",
+            "tu": "que tu aies eu",
+            "il": "qu'il ait eu",
+            "elle": "qu'elle ait eu",
+            "nous": "que nous ayons eu",
+            "vous": "que vous ayez eu",
+            "ils": "qu'ils aient eu",
+            "elles": "qu'elles aient eu"
+        },
+        "Conditionnel Pr\u00e9sent": {
+            "je": "j'aurais",
+            "tu": "tu aurais",
+            "il": "il aurait",
+            "elle": "elle aurait",
+            "nous": "nous aurions",
+            "vous": "vous auriez",
+            "ils": "ils auraient",
+            "elles": "elles auraient"
+        },
+        "Conditionnel Pass\u00e9 premi\u00e8re forme": {
+            "je": "j'aurais eu",
+            "tu": "tu aurais eu",
+            "il": "il aurait eu",
+            "elle": "elle aurait eu",
+            "nous": "nous aurions eu",
+            "vous": "vous auriez eu",
+            "ils": "ils auraient eu",
+            "elles": "elles auraient eu"
+        },
+        "Conditionnel Pass\u00e9 deuxi\u00e8me forme": {
+            "je": "j'eusse eu",
+            "tu": "tu eusses eu",
+            "il": "il e\u00fbt eu",
+            "elle": "elle e\u00fbt eu",
+            "nous": "nous eussions eu",
+            "vous": "vous eussiez eu",
+            "ils": "ils eussent eu",
+            "elles": "elles eussent eu"
+        },
+        "Imp\u00e9ratif Pr\u00e9sent": {
+            "tu": "aie",
+            "nous": "ayons",
+            "vous": "ayez"
+        },
+        "Imp\u00e9ratif Pass\u00e9": {
+            "tu": "aie eu",
+            "nous": "ayons eu",
+            "vous": "ayez eu"
+        }
+    }
+}

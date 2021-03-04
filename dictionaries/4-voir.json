@@ -1,0 +1,164 @@
+{
+    "voir": {
+        "Indicatif Pr\u00e9sent": {
+            "je": "je vois",
+            "tu": "tu vois",
+            "il": "il voit",
+            "elle": "elle voit",
+            "nous": "nous voyons",
+            "vous": "vous voyez",
+            "ils": "ils voient",
+            "elles": "elles voient"
+        },
+        "Indicatif Imparfait": {
+            "je": "je voyais",
+            "tu": "tu voyais",
+            "il": "il voyait",
+            "elle": "elle voyait",
+            "nous": "nous voyions",
+            "vous": "vous voyiez",
+            "ils": "ils voyaient",
+            "elles": "elles voyaient"
+        },
+        "Indicatif Futur": {
+            "je": "je verrai",
+            "tu": "tu verras",
+            "il": "il verra",
+            "elle": "elle verra",
+            "nous": "nous verrons",
+            "vous": "vous verrez",
+            "ils": "ils verront",
+            "elles": "elles verront"
+        },
+        "Indicatif Pass\u00e9 simple": {
+            "je": "je vis",
+            "tu": "tu vis",
+            "il": "il vit",
+            "elle": "elle vit",
+            "nous": "nous v\u00eemes",
+            "vous": "vous v\u00eetes",
+            "ils": "ils virent",
+            "elles": "elles virent"
+        },
+        "Indicatif Pass\u00e9 compos\u00e9": {
+            "je": "j'ai vu",
+            "tu": "tu as vu",
+            "il": "il a vu",
+            "elle": "elle a vu",
+            "nous": "nous avons vu",
+            "vous": "vous avez vu",
+            "ils": "ils ont vu",
+            "elles": "elles ont vu"
+        },
+        "Indicatif Plus-que-parfait": {
+            "je": "j'avais vu",
+            "tu": "tu avais vu",
+            "il": "il avait vu",
+            "elle": "elle avait vu",
+            "nous": "nous avions vu",
+            "vous": "vous aviez vu",
+            "ils": "ils avaient vu",
+            "elles": "elles avaient vu"
+        },
+        "Indicatif Pass\u00e9 ant\u00e9rieur": {
+            "je": "j'eus vu",
+            "tu": "tu eus vu",
+            "il": "il eut vu",
+            "elle": "elle eut vu",
+            "nous": "nous e\u00fbmes vu",
+            "vous": "vous e\u00fbtes vu",
+            "ils": "ils eurent vu",
+            "elles": "elles eurent vu"
+        },
+        "Indicatif Futur ant\u00e9rieur": {
+            "je": "j'aurai vu",
+            "tu": "tu auras vu",
+            "il": "il aura vu",
+            "elle": "elle aura vu",
+            "nous": "nous aurons vu",
+            "vous": "vous aurez vu",
+            "ils": "ils auront vu",
+            "elles": "elles auront vu"
+        },
+        "Subjonctif Pr\u00e9sent": {
+            "je": "que je voie",
+            "tu": "que tu voies",
+            "il": "qu'il voie",
+            "elle": "qu'elle voie",
+            "nous": "que nous voyions",
+            "vous": "que vous voyiez",
+            "ils": "qu'ils voient",
+            "elles": "qu'elles voient"
+        },
+        "Subjonctif Imparfait": {
+            "je": "que je visse",
+            "tu": "que tu visses",
+            "il": "qu'il v\u00eet",
+            "elle": "qu'elle v\u00eet",
+            "nous": "que nous vissions",
+            "vous": "que vous vissiez",
+            "ils": "qu'ils vissent",
+            "elles": "qu'elles vissent"
+        },
+        "Subjonctif Plus-que-parfait": {
+            "je": "que j'eusse vu",
+            "tu": "que tu eusses vu",
+            "il": "qu'il e\u00fbt vu",
+            "elle": "qu'elle e\u00fbt vu",
+            "nous": "que nous eussions vu",
+            "vous": "que vous eussiez vu",
+            "ils": "qu'ils eussent vu",
+            "elles": "qu'elles eussent vu"
+        },
+        "Subjonctif Pass\u00e9": {
+            "je": "que j'aie vu",
+            "tu": "que tu aies vu",
+            "il": "qu'il ait vu",
+            "elle": "qu'elle ait vu",
+            "nous": "que nous ayons vu",
+            "vous": "que vous ayez vu",
+            "ils": "qu'ils aient vu",
+            "elles": "qu'elles aient vu"
+        },
+        "Conditionnel Pr\u00e9sent": {
+            "je": "je verrais",
+            "tu": "tu verrais",
+            "il": "il verrait",
+            "elle": "elle verrait",
+            "nous": "nous verrions",
+            "vous": "vous verriez",
+            "ils": "ils verraient",
+            "elles": "elles verraient"
+        },
+        "Conditionnel Pass\u00e9 premi\u00e8re forme": {
+            "je": "j'aurais vu",
+            "tu": "tu aurais vu",
+            "il": "il aurait vu",
+            "elle": "elle aurait vu",
+            "nous": "nous aurions vu",
+            "vous": "vous auriez vu",
+            "ils": "ils auraient vu",
+            "elles": "elles auraient vu"
+        },
+        "Conditionnel Pass\u00e9 deuxi\u00e8me forme": {
+            "je": "j'eusse vu",
+            "tu": "tu eusses vu",
+            "il": "il e\u00fbt vu",
+            "elle": "elle e\u00fbt vu",
+            "nous": "nous eussions vu",
+            "vous": "vous eussiez vu",
+            "ils": "ils eussent vu",
+            "elles": "elles eussent vu"
+        },
+        "Imp\u00e9ratif Pr\u00e9sent": {
+            "tu": "vois",
+            "nous": "voyons",
+            "vous": "voyez"
+        },
+        "Imp\u00e9ratif Pass\u00e9": {
+            "tu": "aie vu",
+            "nous": "ayons vu",
+            "vous": "ayez vu"
+        }
+    }
+}
