@@ -16,8 +16,6 @@ except ImportError:
 #       - This option has to be displayed before getting into the temps and mode screen.
 #       - Allow saving this list to a file. So users can load it later.
 #       - IMPORTANT: This might result in an error, given that we don't have every possible verb
-# TODO: Change the description of the instructions to Verbe, Mode, Temps, Personne. NOTE: We already have Mode-Temps on
-#       the same string. Is this fine?
 # TODO: We could add a mode in which after some wrong answers, the game ends.
 
 
@@ -61,7 +59,7 @@ init_msg_special = "\n\n" + \
 
 
 class FrenchConjugatorGame:
-    DICTIONARIES_REL_PATH = "./dictionaries"
+    DICTIONARIES_REL_PATH = "../res/dictionaries"
     DICTIONARY_FILENAME = "dictionary-conj-verbs.json"
     PERSONS_IMPERATIVE = ("tu", "nous", "vous")
     PERSONS_REGULAR = ("je", "tu", "il", "elle", "nous", "vous", "ils", "elles")
@@ -141,26 +139,25 @@ class FrenchConjugatorGame:
 
                 print('-------------------')
                 # question_text = f"{clr.Style.BRIGHT}" \
-                #                 f"  verb:  {verb}\n" \
-                #                 f"  nom:   {person}\n" \
-                #                 f"  temps: {verb_time}\n" \
+                #                 f" verbe:      {verb}\n" \
+                #                 f" personne:   {person}\n" \
+                #                 f" mode-temps: {verb_time}\n" \
                 #                 f"{clr.Style.RESET_ALL}"
                 #
-                # question_text = f"{clr.Style.BRIGHT}  verb:{clr.Style.DIM}  {verb}\n" \
-                #                 f"{clr.Style.BRIGHT}  nom:{clr.Style.DIM}   {person}\n" \
-                #                 f"{clr.Style.BRIGHT}  temps:{clr.Style.DIM} {verb_time}\n"
+                # question_text = f" {clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+                #                 f" {clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n" \
+                #                 f" {clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n"
                 #
-                # question_text = f"  verb:{clr.Style.BRIGHT}  {verb}{clr.Style.DIM}\n" \
-                #                 f"  nom:{clr.Style.BRIGHT}   {person}{clr.Style.DIM}\n" \
-                #                 f"  temps:{clr.Style.BRIGHT} {verb_time}{clr.Style.DIM}\n"
+                # question_text = f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
+                #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n" \
+                #                 f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n"
                 #
-                # question_text = f"{clr.Style.BRIGHT}  temps:{clr.Style.DIM} {verb_time}\n" \
-                #                 f"{clr.Style.BRIGHT}  verb:{clr.Style.DIM}  {verb}\n" \
-                #                 f"{clr.Style.BRIGHT}  nom:{clr.Style.DIM}   {person}\n"
-
-                question_text = f"  temps:{clr.Style.BRIGHT} {verb_time}{clr.Style.DIM}\n" \
-                                f"  verb:{clr.Style.BRIGHT}  {verb}{clr.Style.DIM}\n" \
-                                f"  nom:{clr.Style.BRIGHT}   {person}{clr.Style.DIM}\n"
+                question_text = f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n" \
+                                f"{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+                                f"{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n"
+                # question_text = f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n" \
+                #                 f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
+                #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n"
 
                 raw_input = input(question_text)
 
