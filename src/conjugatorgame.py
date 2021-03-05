@@ -111,6 +111,9 @@ class FrenchConjugatorGame:
         self.nb_correct_answers = 0
 
     def start_app(self):
+        # Clear the screen before start
+        print(clr.ansi.clear_screen())
+
         raw_input = input(init_msg_special)
 
         options, error_message = self._process_raw_input_options(raw_input)
@@ -137,6 +140,8 @@ class FrenchConjugatorGame:
             while self.game_ongoing:
                 verb, verb_time, person = self._get_components_question(verb_list, verb_times_list)
 
+                print(clr.ansi.clear_screen())
+
                 print('-------------------')
                 # question_text = f"{clr.Style.BRIGHT}" \
                 #                 f" verbe:      {verb}\n" \
@@ -159,16 +164,15 @@ class FrenchConjugatorGame:
                 #                 f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
                 #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n"
 
-                raw_input = input(question_text)
+                print(question_text)
+                raw_input = input()
 
                 self._evaluate_answer(verb, verb_time, person, raw_input)
 
-                continue_ans = input("\nContinue? [y]/n: ")
-                if continue_ans == 'n':
-                    self.end_game()
-
     def end_game(self, error_msg=None):
         self.game_ongoing = False
+
+        print(clr.ansi.clear_screen())
 
         if error_msg:
             print(f"An error ocurred:")
@@ -209,6 +213,10 @@ class FrenchConjugatorGame:
                 self.nb_wrong_answers += 1
                 print(
                     f"{clr.Style.BRIGHT}{clr.Fore.RED}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
+
+            continue_ans = input("\nContinue? [y]/n: ")
+            if continue_ans == 'n':
+                self.end_game()
 
     def _get_components_question(self, verb_list, verb_times_list):
         verb = random.choice(verb_list)
