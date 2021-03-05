@@ -169,7 +169,7 @@ class FrenchConjugatorGame:
 
                 self._evaluate_answer(verb, verb_time, person, raw_input)
 
-    def end_game(self, error_msg=None):
+    def end_game(self, preamble=None, error_msg=None):
         self.game_ongoing = False
 
         print(clr.ansi.clear_screen())
@@ -181,8 +181,12 @@ class FrenchConjugatorGame:
         total = self.nb_correct_answers + self.nb_wrong_answers
 
         print(f"{clr.Style.BRIGHT}")
+
+        if preamble:
+            print("{:^30s}\n".format(preamble))
+
         #print(" {:^30s}".format("Game finished"))
-        print(" {:^30s}".format("Summary"))
+        print("{:^30s}".format("Summary"))
         print("-"*30)
         if total:
             # print(f" Correct answers: {self.nb_correct_answers}/{total}")
@@ -202,10 +206,9 @@ class FrenchConjugatorGame:
         raw_input = raw_input.strip()
 
         if raw_input == "exit":
-            self.end_game()
+            self.end_game("You exit the game.")
         else:
             if raw_input == self.dictionary[verb][verb_time][person]:
-                # clr.Cursor.UP(1)
                 self.nb_correct_answers += 1
                 print(
                     f"{clr.Style.BRIGHT}{clr.Fore.GREEN}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
@@ -214,9 +217,12 @@ class FrenchConjugatorGame:
                 print(
                     f"{clr.Style.BRIGHT}{clr.Fore.RED}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
 
-            continue_ans = input("\nContinue? [y]/n: ")
-            if continue_ans == 'n':
-                self.end_game()
+            if self.nb_wrong_answers > 4:
+                self.end_game(preamble="Run out of tries.")
+            else:
+                continue_ans = input("\nContinue? [y]/n: ")
+                if continue_ans == 'n':
+                    self.end_game()
 
     def _get_components_question(self, verb_list, verb_times_list):
         verb = random.choice(verb_list)
