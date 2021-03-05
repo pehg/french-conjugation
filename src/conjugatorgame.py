@@ -3,20 +3,29 @@ import os
 import random
 import colorama as clr
 import contextlib
+import shutil
+
 try:
     import simplejson as json
 except ImportError:
     import json
 
-
 # TODO List
-# TODO: Evaluate if cleaning the screen after each try is a better user experience
-# TODO: Add a command to exit the app, for instance, write 'exit', or press 'esc'
 # TODO: - Add an option to create your own list of verbs.
 #       - This option has to be displayed before getting into the temps and mode screen.
 #       - Allow saving this list to a file. So users can load it later.
 #       - IMPORTANT: This might result in an error, given that we don't have every possible verb
-# TODO: We could add a mode in which after some wrong answers, the game ends.
+# TODO: Move all strings from menus to a resource file.
+#           - Continue using JSON?
+#           - Read the file when starting the game or when the object is created
+#           - Load it to a dictionary
+# TODO: Bug: I think Python's formatting options are not suitable if you apply color or style to the text in console.
+#            The centering functionality fails if the text contain formatting characters. Therefore, I think I need to
+#            write a special function to manually center the text. I guess using len(text) and then filling the left
+#            side with blanks depending on the size of the screen.
+# TODO: Bug: Using relative paths to find the files to read is causing a problem:
+#            - Change to
+# TODO: Feature. Fill in automatically the person, so the user focus only in filling the conjugated verb
 
 
 # ---------------------
@@ -43,7 +52,7 @@ except ImportError:
 
 logging.basicConfig(level=logging.INFO)
 
-init_msg_special = "\n\n" + \
+init_msg_special = "\n" + \
                    "-----------------------------------------------------------------\n" + \
                    "  Conjugaison verbe Français\n" + \
                    "-----------------------------------------------------------------\n" + \
@@ -142,7 +151,8 @@ class FrenchConjugatorGame:
 
                 print(clr.ansi.clear_screen())
 
-                print('-------------------')
+                # print('-------------------')
+                self._print_centered_hline(w_pcnt_screen=0.5)
                 # question_text = f"{clr.Style.BRIGHT}" \
                 #                 f" verbe:      {verb}\n" \
                 #                 f" personne:   {person}\n" \
@@ -157,19 +167,30 @@ class FrenchConjugatorGame:
                 #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n" \
                 #                 f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n"
                 #
-                question_text = f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n" \
-                                f"{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
-                                f"{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n"
+                # question_text = f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n" \
+                #                 f"{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+                #                 f"{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n"
+
                 # question_text = f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n" \
                 #                 f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
                 #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n"
 
-                print(question_text)
+                # print(question_text)
+                # self._print_centered_msg(f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}")
+                # self._print_centered_msg(f"{clr.Style.BRIGHT}verbe: {clr.Style.DIM}{verb}")
+                # self._print_centered_msg(f"{clr.Style.BRIGHT}personne: {clr.Style.DIM}{person}")
+
+                self._print_centered_msg(f"mode-temps: {verb_time}")
+                self._print_centered_msg(f"verbe: {verb}")
+                self._print_centered_msg(f"personne: {person}")
+
                 raw_input = input()
 
                 self._evaluate_answer(verb, verb_time, person, raw_input)
 
     def end_game(self, preamble=None, error_msg=None):
+        sh_w, sh_h = shutil.get_terminal_size()
+
         self.game_ongoing = False
 
         print(clr.ansi.clear_screen())
@@ -183,31 +204,57 @@ class FrenchConjugatorGame:
         print(f"{clr.Style.BRIGHT}")
 
         if preamble:
-            print("{:^30s}\n".format(preamble))
+            self._print_centered_msg(f"{preamble}\n")
 
-        #print(" {:^30s}".format("Game finished"))
-        print("{:^30s}".format("Summary"))
-        print("-"*30)
+        self._print_centered_msg('Summary')
+
+        # print(f"{'-' * (sh_w // 2):^{sh_w}}")
+        self._print_centered_hline(w_pcnt_screen=0.5)
+
         if total:
-            # print(f" Correct answers: {self.nb_correct_answers}/{total}")
-            # print(f" Score: {100 * self.nb_correct_answers / (total)}")
-            print("{:^30}".format(f"Correct answers: {self.nb_correct_answers}/{total}"))
-            print("{:^30}".format(f"Score: {100 * self.nb_correct_answers / (total)}"))
+            self._print_centered_msg(f'Correct answers: {self.nb_correct_answers}/{total}')
+            self._print_centered_msg(f'Score: {100 * self.nb_correct_answers / (total)}')
         else:
-            # print(f" No answers.")
-            print("{:^30}".format("No answers"))
+            self._print_centered_msg("No answers")
         print(f"{clr.Style.RESET_ALL}")
 
         # Wait for an input to finish the game and clear the screen before getting out of the app
         input()
         print(clr.ansi.clear_screen())
 
-
-
     # -------------------------------------------------------
     #  Helper functions
     # -------------------------------------------------------
+    @staticmethod
+    def _print_centered_hline(pattern='-', w_pcnt_screen=1.0, above_space=0, below_space=0):
+        if w_pcnt_screen < 0:
+            return
+        elif w_pcnt_screen > 1:
+            w_pcnt_screen = 1
+
+        # TODO: If we have a pattern that consists in more than one character, we have to do a correction. BUt this is
+        #       a helper function, it won't be used in a very complicated way.
+        len(pattern)
+
+        sh_w, sh_h = shutil.get_terminal_size()
+
+        line_width = int(sh_w * w_pcnt_screen)
+
+        # TODO: pending to make it work
+        # print(f"'\n'*above_space"
+        #       f"{f'{pattern * line_width}':{sh_w}}"
+        #       f"{f'\n' * below_space}")
+        print(f"{f'{pattern * line_width}':^{sh_w}}")
+
+    @staticmethod
+    def _print_centered_msg(msg, downsize=0):
+        # Request the size of the shell everytime just in case the user resized in the middle of the game
+        sh_w, sh_h = shutil.get_terminal_size()
+
+        print(f"{msg:^{sh_w}}")
+
     def _evaluate_answer(self, verb, verb_time, person, raw_input):
+
         raw_input = raw_input.strip()
 
         if raw_input == "exit":
@@ -224,7 +271,8 @@ class FrenchConjugatorGame:
 
             if self.nb_wrong_answers > 4:
                 # Wait for an input to take a look at the correct response of the final try.
-                print(f"{clr.Style.BRIGHT}\nYou ran out of tries. Press [enter] to continue.{clr.Style.DIM}")
+                # print(f"{clr.Style.BRIGHT}\nYou ran out of tries. Press [enter] to continue.{clr.Style.DIM}")
+                self._print_centered_msg(f"{clr.Style.BRIGHT}\nYou ran out of tries. Press [enter] to continue.{clr.Style.DIM}")
                 input()
                 self.end_game(preamble="You're almost there. Keep practicing!")
             else:
