@@ -198,6 +198,11 @@ class FrenchConjugatorGame:
             print("{:^30}".format("No answers"))
         print(f"{clr.Style.RESET_ALL}")
 
+        # Wait for an input to finish the game and clear the screen before getting out of the app
+        input()
+        print(clr.ansi.clear_screen())
+
+
 
     # -------------------------------------------------------
     #  Helper functions
@@ -218,7 +223,10 @@ class FrenchConjugatorGame:
                     f"{clr.Style.BRIGHT}{clr.Fore.RED}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
 
             if self.nb_wrong_answers > 4:
-                self.end_game(preamble="Run out of tries.")
+                # Wait for an input to take a look at the correct response of the final try.
+                print(f"{clr.Style.BRIGHT}\nYou ran out of tries. Press [enter] to continue.{clr.Style.DIM}")
+                input()
+                self.end_game(preamble="You're almost there. Keep practicing!")
             else:
                 continue_ans = input("\nContinue? [y]/n: ")
                 if continue_ans == 'n':
