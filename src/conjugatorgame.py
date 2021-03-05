@@ -163,6 +163,10 @@ class FrenchConjugatorGame:
 
                 self._evaluate_answer(verb, verb_time, person, raw_input)
 
+                continue_ans = input("\nContinue? [y]/n: ")
+                if continue_ans == 'n':
+                    self.end_game()
+
     def end_game(self, error_msg=None):
         self.game_ongoing = False
 
