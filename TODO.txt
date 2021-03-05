@@ -1,0 +1,46 @@
+TODO List
+[Feature] Add an option to create your own list of verbs.
+    - This option has to be displayed before getting into the temps and mode screen.
+    - Allow saving this list to a file. So users can load it later.
+    - IMPORTANT: This might result in an error, given that we don't have every possible verb
+
+[Feature] Fill in automatically the person, so the user focus only in filling the conjugated verb
+
+[Infra] Move all strings from menus to a resource file.
+    - Continue using JSON?
+    - Read the file when starting the game or when the object is created
+    - Load it to a dictionary
+
+[Bug/Infra] Centered formatting
+  I think Python's formatting options are not suitable if you apply color or style to the text in console.
+  The centering functionality fails if the text contain formatting characters. Therefore, I think I need to
+  write a special function to manually center the text. I guess using len(text) and then filling the left
+  side with blanks depending on the size of the screen.
+
+[Bug] Using relative paths to find the files to read is causing a problem
+
+
+
+
+# This data is temporary while still under development. Just because I might need it
+# ---------------------
+#  Indicatif
+# ---------------------
+# "Indicatif Présent", "Indicatif Imparfait", "Indicatif Futur"
+# "Indicatif Passé simple", "Indicatif Passé composé", "Indicatif Plus-que-parfait"
+# "Indicatif Passé antérieur", "Indicatif Futur antérieur"
+
+# ---------------------
+#  Subjonctif
+# ---------------------
+# "Subjonctif Présent", "Subjonctif Imparfait", "Subjonctif Plus-que-parfait", "Subjonctif Passé"
+
+# ---------------------
+#  Conditionnel
+# ---------------------
+# "Conditionnel Présent", "Conditionnel Passé première forme", "Conditionnel Passé deuxième forme"
+
+# ---------------------
+#  Imperatif
+# ---------------------
+# "Impératif Présent", "Impératif Passé"

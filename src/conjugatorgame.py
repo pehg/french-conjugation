@@ -10,46 +10,6 @@ try:
 except ImportError:
     import json
 
-# TODO List
-# TODO: - Add an option to create your own list of verbs.
-#       - This option has to be displayed before getting into the temps and mode screen.
-#       - Allow saving this list to a file. So users can load it later.
-#       - IMPORTANT: This might result in an error, given that we don't have every possible verb
-# TODO: Move all strings from menus to a resource file.
-#           - Continue using JSON?
-#           - Read the file when starting the game or when the object is created
-#           - Load it to a dictionary
-# TODO: Bug: I think Python's formatting options are not suitable if you apply color or style to the text in console.
-#            The centering functionality fails if the text contain formatting characters. Therefore, I think I need to
-#            write a special function to manually center the text. I guess using len(text) and then filling the left
-#            side with blanks depending on the size of the screen.
-# TODO: Bug: Using relative paths to find the files to read is causing a problem:
-#            - Change to
-# TODO: Feature. Fill in automatically the person, so the user focus only in filling the conjugated verb
-
-
-# ---------------------
-#  Indicatif
-# ---------------------
-# "Indicatif Présent", "Indicatif Imparfait", "Indicatif Futur"
-# "Indicatif Passé simple", "Indicatif Passé composé", "Indicatif Plus-que-parfait"
-# "Indicatif Passé antérieur", "Indicatif Futur antérieur"
-
-# ---------------------
-#  Subjonctif
-# ---------------------
-# "Subjonctif Présent", "Subjonctif Imparfait", "Subjonctif Plus-que-parfait", "Subjonctif Passé"
-
-# ---------------------
-#  Conditionnel
-# ---------------------
-# "Conditionnel Présent", "Conditionnel Passé première forme", "Conditionnel Passé deuxième forme"
-
-# ---------------------
-#  Imperatif
-# ---------------------
-# "Impératif Présent", "Impératif Passé"
-
 logging.basicConfig(level=logging.INFO)
 
 init_msg_special = "\n" + \
@@ -208,7 +168,6 @@ class FrenchConjugatorGame:
 
         self._print_centered_msg('Summary')
 
-        # print(f"{'-' * (sh_w // 2):^{sh_w}}")
         self._print_centered_hline(w_pcnt_screen=0.5)
 
         if total:
