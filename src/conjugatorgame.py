@@ -167,12 +167,25 @@ class FrenchConjugatorGame:
         self.game_ongoing = False
 
         if error_msg:
+            print(f"An error ocurred:")
             print(error_msg)
 
-        print(f"Game finished.")
-        print(f"Total conjugations: {self.nb_correct_answers + self.nb_wrong_answers}")
-        print(f"Correct answers: {self.nb_correct_answers}")
-        print(f"Incorrect answers: {self.nb_wrong_answers}")
+        total = self.nb_correct_answers + self.nb_wrong_answers
+
+        print(f"{clr.Style.BRIGHT}")
+        #print(" {:^30s}".format("Game finished"))
+        print(" {:^30s}".format("Summary"))
+        print("-"*30)
+        if total:
+            # print(f" Correct answers: {self.nb_correct_answers}/{total}")
+            # print(f" Score: {100 * self.nb_correct_answers / (total)}")
+            print("{:^30}".format(f"Correct answers: {self.nb_correct_answers}/{total}"))
+            print("{:^30}".format(f"Score: {100 * self.nb_correct_answers / (total)}"))
+        else:
+            # print(f" No answers.")
+            print("{:^30}".format("No answers"))
+        print(f"{clr.Style.RESET_ALL}")
+
 
     # -------------------------------------------------------
     #  Helper functions
@@ -192,7 +205,6 @@ class FrenchConjugatorGame:
                 self.nb_wrong_answers += 1
                 print(
                     f"{clr.Style.BRIGHT}{clr.Fore.RED}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
-
 
     def _get_components_question(self, verb_list, verb_times_list):
         verb = random.choice(verb_list)
