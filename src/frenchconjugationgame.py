@@ -27,7 +27,7 @@ init_msg_special = "\n" + \
                    "Your choice: "
 
 
-class FrenchConjugatorGame:
+class FrenchConjugationGame:
     DICTIONARIES_REL_PATH = "../res/dictionaries"
     DICTIONARY_FILENAME = "dictionary-conj-verbs.json"
     PERSONS_IMPERATIVE = ("tu", "nous", "vous")
