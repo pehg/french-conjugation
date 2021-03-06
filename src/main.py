@@ -1,6 +1,6 @@
-import conjugatorgame
+import hgfrenchconjugationgame as hgfcg
 
 
 if __name__ == '__main__':
-    app = conjugatorgame.FrenchConjugatorGame()
+    app = hgfcg.FrenchConjugationGame()
     app.start_app()
