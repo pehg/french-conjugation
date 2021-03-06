@@ -4,7 +4,7 @@ import random
 import colorama as clr
 import contextlib
 import shutil
-
+import hgfcgutils
 try:
     import simplejson as json
 except ImportError:
@@ -130,12 +130,13 @@ class FrenchConjugatorGame:
                 # question_text = f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n" \
                 #                 f"{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
                 #                 f"{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n"
-
+                #
                 # question_text = f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n" \
                 #                 f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
                 #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n"
 
                 # print(question_text)
+
                 # self._print_centered_msg(f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}")
                 # self._print_centered_msg(f"{clr.Style.BRIGHT}verbe: {clr.Style.DIM}{verb}")
                 # self._print_centered_msg(f"{clr.Style.BRIGHT}personne: {clr.Style.DIM}{person}")
@@ -143,10 +144,11 @@ class FrenchConjugatorGame:
                 self._print_centered_msg(f"mode-temps: {verb_time}")
                 self._print_centered_msg(f"verbe: {verb}")
                 self._print_centered_msg(f"personne: {person}")
+                # Display the person, so the user focuses only in conjugating the verb
+                _, p_str = hgfcgutils.get_person_str(verb_time, self.dictionary[verb][verb_time][person])
+                raw_input = input(p_str)
 
-                raw_input = input()
-
-                self._evaluate_answer(verb, verb_time, person, raw_input)
+                self._evaluate_answer(verb, verb_time, person, raw_input, p_str)
 
     def end_game(self, preamble=None, error_msg=None):
         sh_w, sh_h = shutil.get_terminal_size()
@@ -212,13 +214,14 @@ class FrenchConjugatorGame:
 
         print(f"{msg:^{sh_w}}")
 
-    def _evaluate_answer(self, verb, verb_time, person, raw_input):
+    def _evaluate_answer(self, verb, verb_time, person, raw_input, person_str=""):
 
         raw_input = raw_input.strip()
 
         if raw_input == "exit":
             self.end_game("You exit the game.")
         else:
+            raw_input = f"{person_str}{raw_input}"
             if raw_input == self.dictionary[verb][verb_time][person]:
                 self.nb_correct_answers += 1
                 print(
