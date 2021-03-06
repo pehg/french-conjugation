@@ -40,6 +40,7 @@ class FrenchConjugatorGame:
         self.dictionary = None
         self.difficult_conjugations = None  # This will be a list with the wrong answers that need to be repeated
         self.game_ongoing = False
+        self._indent = 8
 
         # TODO: Change the negative options once I have everything defined
         self.OPTIONS_DICTIONARY = {1: ["Indicatif Présent", "Indicatif Imparfait", "Indicatif Futur",
@@ -81,7 +82,7 @@ class FrenchConjugatorGame:
 
     def start_app(self):
         # Clear the screen before start
-        print(clr.ansi.clear_screen())
+        print(clr.ansi.clear_screen(), end="")
 
         raw_input = input(init_msg_special)
 
@@ -109,61 +110,50 @@ class FrenchConjugatorGame:
             while self.game_ongoing:
                 verb, verb_time, person = self._get_components_question(verb_list, verb_times_list)
 
-                print(clr.ansi.clear_screen())
+                self._display_question_screen(person, verb, verb_time)
 
-                # print('-------------------')
-                self._print_centered_hline(w_pcnt_screen=0.5)
-                # question_text = f"{clr.Style.BRIGHT}" \
-                #                 f" verbe:      {verb}\n" \
-                #                 f" personne:   {person}\n" \
-                #                 f" mode-temps: {verb_time}\n" \
-                #                 f"{clr.Style.RESET_ALL}"
-                #
-                # question_text = f" {clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
-                #                 f" {clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n" \
-                #                 f" {clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n"
-                #
-                # question_text = f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
-                #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n" \
-                #                 f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n"
-                #
-                # question_text = f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n" \
-                #                 f"{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
-                #                 f"{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n"
-                #
-                # question_text = f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n" \
-                #                 f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
-                #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n"
-
-                # print(question_text)
-
-                # self._print_centered_msg(f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}")
-                # self._print_centered_msg(f"{clr.Style.BRIGHT}verbe: {clr.Style.DIM}{verb}")
-                # self._print_centered_msg(f"{clr.Style.BRIGHT}personne: {clr.Style.DIM}{person}")
-
-                self._print_centered_msg(f"mode-temps: {verb_time}")
-                self._print_centered_msg(f"verbe: {verb}")
-                self._print_centered_msg(f"personne: {person}")
                 # Display the person, so the user focuses only in conjugating the verb
                 _, p_str = hgfcgutils.get_person_str(verb_time, self.dictionary[verb][verb_time][person])
-                raw_input = input(p_str)
+                raw_input = input(f"{' ' * self._indent}{p_str}")
 
                 self._evaluate_answer(verb, verb_time, person, raw_input, p_str)
 
     def end_game(self, preamble=None, error_msg=None):
-        sh_w, sh_h = shutil.get_terminal_size()
-
         self.game_ongoing = False
+        self._display_end_screen(preamble=preamble, error_msg=error_msg)
 
-        print(clr.ansi.clear_screen())
+    # -------------------------------------------------------
+    #  Helper functions
+    # -------------------------------------------------------
+    def _display_question_screen(self, person, verb, verb_time):
+        print(clr.ansi.clear_screen(), end="")
+
+        # Add some vertical space
+        print("\n\n")
+
+        print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+
+        question_text = f"{' ' * self._indent}{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n" \
+                        f"{' ' * self._indent}{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+                        f"{' ' * self._indent}{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n"
+
+        print(question_text)
+
+        print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+
+    def _display_end_screen(self, preamble=None, error_msg=None):
+        print(clr.ansi.clear_screen(), end="")
+
+        # Add some vertical space
+        print("\n\n")
 
         if error_msg:
-            print(f"An error ocurred:")
-            print(error_msg)
+            self._print_centered_msg("An error ocurred:")
+            self._print_centered_msg(error_msg)
 
         total = self.nb_correct_answers + self.nb_wrong_answers
 
-        print(f"{clr.Style.BRIGHT}")
+        print(f"{clr.Style.BRIGHT}", end="")
 
         if preamble:
             self._print_centered_msg(f"{preamble}\n")
@@ -177,15 +167,16 @@ class FrenchConjugatorGame:
             self._print_centered_msg(f'Score: {100 * self.nb_correct_answers / (total)}')
         else:
             self._print_centered_msg("No answers")
-        print(f"{clr.Style.RESET_ALL}")
+
+        print(f"{clr.Style.RESET_ALL}", end="")
+
+        self._print_centered_hline(w_pcnt_screen=0.5)
+        self._print_centered_msg("Press [enter] to quit")
 
         # Wait for an input to finish the game and clear the screen before getting out of the app
         input()
-        print(clr.ansi.clear_screen())
+        print(clr.ansi.clear_screen(), "")
 
-    # -------------------------------------------------------
-    #  Helper functions
-    # -------------------------------------------------------
     @staticmethod
     def _print_centered_hline(pattern='-', w_pcnt_screen=1.0, above_space=0, below_space=0):
         if w_pcnt_screen < 0:
@@ -219,26 +210,30 @@ class FrenchConjugatorGame:
         raw_input = raw_input.strip()
 
         if raw_input == "exit":
-            self.end_game("You exit the game.")
+            self.end_game("You exit the game")
         else:
             raw_input = f"{person_str}{raw_input}"
             if raw_input == self.dictionary[verb][verb_time][person]:
                 self.nb_correct_answers += 1
-                print(
-                    f"{clr.Style.BRIGHT}{clr.Fore.GREEN}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
+                print(f"{clr.Style.BRIGHT}{clr.Fore.GREEN}", end="")
+                print(f"{' '*self._indent}{self.dictionary[verb][verb_time][person]}")
+                print(f"{clr.Style.RESET_ALL}", end="")
             else:
                 self.nb_wrong_answers += 1
-                print(
-                    f"{clr.Style.BRIGHT}{clr.Fore.RED}{self.dictionary[verb][verb_time][person]}{clr.Style.RESET_ALL}")
+                print(f"{clr.Style.BRIGHT}{clr.Fore.RED}", end="")
+                print(f"{' '*self._indent}{self.dictionary[verb][verb_time][person]}")
+                print(f"{clr.Style.RESET_ALL}", end="")
 
             if self.nb_wrong_answers > 4:
                 # Wait for an input to take a look at the correct response of the final try.
-                # print(f"{clr.Style.BRIGHT}\nYou ran out of tries. Press [enter] to continue.{clr.Style.DIM}")
-                self._print_centered_msg(f"{clr.Style.BRIGHT}\nYou ran out of tries. Press [enter] to continue.{clr.Style.DIM}")
+                print(f"{clr.Style.BRIGHT}", end="")
+                self._print_centered_msg(f"{' '*self._indent}You ran out of tries. Press [enter] to continue.")
+                print(f"{clr.Style.DIM}", end="")
+
                 input()
                 self.end_game(preamble="You're almost there. Keep practicing!")
             else:
-                continue_ans = input("\nContinue? [y]/n: ")
+                continue_ans = input(f"\n{' '*self._indent}Continue? [y]/n: ")
                 if continue_ans == 'n':
                     self.end_game()
 
