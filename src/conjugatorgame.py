@@ -148,62 +148,34 @@ class FrenchConjugatorGame:
         print("\n\n")
 
         if error_msg:
-            self._print_centered_msg("An error ocurred:")
-            self._print_centered_msg(error_msg)
+            hgfcgutils.print_centered_msg("An error ocurred:")
+            hgfcgutils.print_centered_msg(error_msg)
 
         total = self.nb_correct_answers + self.nb_wrong_answers
 
         print(f"{clr.Style.BRIGHT}", end="")
 
         if preamble:
-            self._print_centered_msg(f"{preamble}\n")
+            hgfcgutils.print_centered_msg(f"{preamble}\n")
 
-        self._print_centered_msg('Summary')
+        hgfcgutils.print_centered_msg('Summary')
 
-        self._print_centered_hline(w_pcnt_screen=0.5)
+        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5)
 
         if total:
-            self._print_centered_msg(f'Correct answers: {self.nb_correct_answers}/{total}')
-            self._print_centered_msg(f'Score: {100 * self.nb_correct_answers / (total)}')
+            hgfcgutils.print_centered_msg(f'Correct answers: {self.nb_correct_answers}/{total}')
+            hgfcgutils.print_centered_msg(f'Score: {100 * self.nb_correct_answers / (total)}')
         else:
-            self._print_centered_msg("No answers")
+            hgfcgutils.print_centered_msg("No answers")
 
         print(f"{clr.Style.RESET_ALL}", end="")
 
-        self._print_centered_hline(w_pcnt_screen=0.5)
-        self._print_centered_msg("Press [enter] to quit")
+        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5)
+        hgfcgutils.print_centered_msg("Press [enter] to quit")
 
         # Wait for an input to finish the game and clear the screen before getting out of the app
         input()
         print(clr.ansi.clear_screen(), "")
-
-    @staticmethod
-    def _print_centered_hline(pattern='-', w_pcnt_screen=1.0, above_space=0, below_space=0):
-        if w_pcnt_screen < 0:
-            return
-        elif w_pcnt_screen > 1:
-            w_pcnt_screen = 1
-
-        # TODO: If we have a pattern that consists in more than one character, we have to do a correction. BUt this is
-        #       a helper function, it won't be used in a very complicated way.
-        len(pattern)
-
-        sh_w, sh_h = shutil.get_terminal_size()
-
-        line_width = int(sh_w * w_pcnt_screen)
-
-        # TODO: pending to make it work
-        # print(f"'\n'*above_space"
-        #       f"{f'{pattern * line_width}':{sh_w}}"
-        #       f"{f'\n' * below_space}")
-        print(f"{f'{pattern * line_width}':^{sh_w}}")
-
-    @staticmethod
-    def _print_centered_msg(msg, downsize=0):
-        # Request the size of the shell everytime just in case the user resized in the middle of the game
-        sh_w, sh_h = shutil.get_terminal_size()
-
-        print(f"{msg:^{sh_w}}")
 
     def _evaluate_answer(self, verb, verb_time, person, raw_input, person_str=""):
 
@@ -227,7 +199,7 @@ class FrenchConjugatorGame:
             if self.nb_wrong_answers > 4:
                 # Wait for an input to take a look at the correct response of the final try.
                 print(f"{clr.Style.BRIGHT}", end="")
-                self._print_centered_msg(f"{' '*self._indent}You ran out of tries. Press [enter] to continue.")
+                hgfcgutils.print_centered_msg(f"{' '*self._indent}You ran out of tries. Press [enter] to continue.")
                 print(f"{clr.Style.DIM}", end="")
 
                 input()
@@ -249,8 +221,7 @@ class FrenchConjugatorGame:
         return verb, verb_time, person
 
     def _load_dictionary(self):
-
-        with self._change_dir(self.DICTIONARIES_REL_PATH):
+        with hgfcgutils.change_dir(self.DICTIONARIES_REL_PATH):
             for file in os.listdir():
                 with open(file, "r") as f:
                     tmp_dict = json.load(f)
@@ -321,21 +292,3 @@ class FrenchConjugatorGame:
 
         logging.info(final_options)
         return final_options
-
-    @contextlib.contextmanager
-    def _change_dir(self, directory):
-        """
-        Changes directory. Should be static but not sure if
-
-        Args:
-            directory (str): Directory to change to.
-
-        Returns:
-
-        """
-        saved_dir = os.getcwd()
-        os.chdir(directory)
-
-        yield
-
-        os.chdir(saved_dir)

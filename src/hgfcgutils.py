@@ -1,5 +1,33 @@
-# conj_str = self.dictionary[verb][tense][person]
+import shutil
+import os
+import contextlib
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+#  Directory functions
+# ---------------------------------------------------------------------------------------------------------------------
+@contextlib.contextmanager
+def change_dir(directory):
+    """
+    Changes directory. Should be static but not sure if
+
+    Args:
+        directory (str): Directory to change to.
+
+    Returns:
+
+    """
+    saved_dir = os.getcwd()
+    os.chdir(directory)
+
+    yield
+
+    os.chdir(saved_dir)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+#  Centered print functions
+# ---------------------------------------------------------------------------------------------------------------------
 def get_person_str(tense, conj_str, person_idx=0):
     subj_agg_idx = -1
 
@@ -20,11 +48,11 @@ def get_person_str(tense, conj_str, person_idx=0):
             return -1, ""
 
     # Always try to find the last blank space
-    bs_idx = conj_str[subj_agg_idx+1:].rfind(" ")
+    bs_idx = conj_str[subj_agg_idx + 1:].rfind(" ")
 
     # if not found, try to find an apostrophe
     if bs_idx == -1:
-        a_idx = conj_str[subj_agg_idx+1:].rfind("'")
+        a_idx = conj_str[subj_agg_idx + 1:].rfind("'")
 
         if a_idx == -1:
             if subj_agg_idx != -1:
@@ -34,9 +62,40 @@ def get_person_str(tense, conj_str, person_idx=0):
         else:
             return a_idx, conj_str[:(subj_agg_idx + 1) + (a_idx + 1)]
     else:
-        p_idx, _ = get_person_str(None, conj_str[subj_agg_idx+1:subj_agg_idx+1+bs_idx], bs_idx)
+        p_idx, _ = get_person_str(None, conj_str[subj_agg_idx + 1:subj_agg_idx + 1 + bs_idx], bs_idx)
 
     return (subj_agg_idx + 1) + p_idx, conj_str[:(subj_agg_idx + 1) + (p_idx + 1)]
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+#  Centered print functions
+# ---------------------------------------------------------------------------------------------------------------------
+def print_centered_hline(pattern='-', w_pcnt_screen=1.0, above_space=0, below_space=0):
+    if w_pcnt_screen < 0:
+        return
+    elif w_pcnt_screen > 1:
+        w_pcnt_screen = 1
+
+    # TODO: If we have a pattern that consists in more than one character, we have to do a correction. BUt this is
+    #       a helper function, it won't be used in a very complicated way.
+    len(pattern)
+
+    sh_w, sh_h = shutil.get_terminal_size()
+
+    line_width = int(sh_w * w_pcnt_screen)
+
+    # TODO: pending to make it work
+    # print(f"'\n'*above_space"
+    #       f"{f'{pattern * line_width}':{sh_w}}"
+    #       f"{f'\n' * below_space}")
+    print(f"{f'{pattern * line_width}':^{sh_w}}")
+
+
+def print_centered_msg(msg, downsize=0):
+    # Request the size of the shell everytime just in case the user resized in the middle of the game
+    sh_w, sh_h = shutil.get_terminal_size()
+
+    print(f"{msg:^{sh_w}}")
 
 # TODO: Turn this into UTs
 # Testing my recursive function go extract the index where the person of the verb finishes
