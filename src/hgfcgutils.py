@@ -25,6 +25,16 @@ def change_dir(directory):
     os.chdir(saved_dir)
 
 
+def is_any_file_in_dir(dir):
+    ret = False
+    for dir_entry in os.scandir(dir):
+        if dir_entry.is_file():
+            ret = True
+            break
+
+    return ret
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 #  Centered print functions
 # ---------------------------------------------------------------------------------------------------------------------
