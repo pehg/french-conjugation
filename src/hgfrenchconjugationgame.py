@@ -29,7 +29,7 @@ init_msg_special = "\n" + \
 
 class FrenchConjugationGame:
     DICTIONARIES_REL_PATH = "../res/dictionaries"
-    DICTIONARY_FILENAME = "dictionary-conj-verbs.json"
+    CUSTOM_DICTIONARIES_REL_PATH = "../res/custom_dictionaries"
     PERSONS_IMPERATIVE = ("tu", "nous", "vous")
     PERSONS_REGULAR = ("je", "tu", "il", "elle", "nous", "vous", "ils", "elles")
 
@@ -221,26 +221,32 @@ class FrenchConjugationGame:
         return verb, verb_time, person
 
     def _load_dictionary(self):
-        with hgfcgutils.change_dir(self.DICTIONARIES_REL_PATH):
-            for file in os.listdir():
-                with open(file, "r") as f:
-                    tmp_dict = json.load(f)
-
-                    if tmp_dict is None:
-                        logging.critical(f"Couldn't load the dictionary: {file}.")
-                    else:
-                        if self.dictionary is None:
-                            self.dictionary = dict()
-                            self.dictionary.update(tmp_dict)
-                        else:
-                            self.dictionary.update(tmp_dict)
+        # Prefer custom dictionaries if there are any
+        if hgfcgutils.is_any_file_in_dir(self.CUSTOM_DICTIONARIES_REL_PATH):
+            for dir_entry in os.scandir(self.CUSTOM_DICTIONARIES_REL_PATH):
+                self._append_dictionary(dir_entry)
+        else:
+            for dir_entry in os.scandir(self.DICTIONARIES_REL_PATH):
+                self._append_dictionary(dir_entry)
 
         if self.dictionary is None:
             logging.critical("Cannot load the dictionary. Closing.")
             error_msg = "Error. Cannot load the dictionary."
             self.end_game(error_msg)
-        # else:
-        #     verb_list = list(self.dictionary.keys())
+
+    def _append_dictionary(self, dir_entry):
+        if dir_entry.is_file():
+            with open(dir_entry, "r") as f:
+                tmp_dict = json.load(f)
+
+                if tmp_dict is None:
+                    logging.critical(f"Couldn't load the dictionary: {f}.")
+                else:
+                    if self.dictionary is None:
+                        self.dictionary = dict()
+                        self.dictionary.update(tmp_dict)
+                    else:
+                        self.dictionary.update(tmp_dict)
 
     def _process_raw_input_options(self, raw_input):
         processed_opts = None

@@ -1,0 +1,164 @@
+{
+    "\u00eatre": {
+        "Indicatif Pr\u00e9sent": {
+            "je": "je suis",
+            "tu": "tu es",
+            "il": "il est",
+            "elle": "elle est",
+            "nous": "nous sommes",
+            "vous": "vous \u00eates",
+            "ils": "ils sont",
+            "elles": "elles sont"
+        },
+        "Indicatif Imparfait": {
+            "je": "j'\u00e9tais",
+            "tu": "tu \u00e9tais",
+            "il": "il \u00e9tait",
+            "elle": "elle \u00e9tait",
+            "nous": "nous \u00e9tions",
+            "vous": "vous \u00e9tiez",
+            "ils": "ils \u00e9taient",
+            "elles": "elles \u00e9taient"
+        },
+        "Indicatif Futur": {
+            "je": "je serai",
+            "tu": "tu seras",
+            "il": "il sera",
+            "elle": "elle sera",
+            "nous": "nous serons",
+            "vous": "vous serez",
+            "ils": "ils seront",
+            "elles": "elles seront"
+        },
+        "Indicatif Pass\u00e9 simple": {
+            "je": "je fus",
+            "tu": "tu fus",
+            "il": "il fut",
+            "elle": "elle fut",
+            "nous": "nous f\u00fbmes",
+            "vous": "vous f\u00fbtes",
+            "ils": "ils furent",
+            "elles": "elles furent"
+        },
+        "Indicatif Pass\u00e9 compos\u00e9": {
+            "je": "j'ai \u00e9t\u00e9",
+            "tu": "tu as \u00e9t\u00e9",
+            "il": "il a \u00e9t\u00e9",
+            "elle": "elle a \u00e9t\u00e9",
+            "nous": "nous avons \u00e9t\u00e9",
+            "vous": "vous avez \u00e9t\u00e9",
+            "ils": "ils ont \u00e9t\u00e9",
+            "elles": "elles ont \u00e9t\u00e9"
+        },
+        "Indicatif Plus-que-parfait": {
+            "je": "j'avais \u00e9t\u00e9",
+            "tu": "tu avais \u00e9t\u00e9",
+            "il": "il avait \u00e9t\u00e9",
+            "elle": "elle avait \u00e9t\u00e9",
+            "nous": "nous avions \u00e9t\u00e9",
+            "vous": "vous aviez \u00e9t\u00e9",
+            "ils": "ils avaient \u00e9t\u00e9",
+            "elles": "elles avaient \u00e9t\u00e9"
+        },
+        "Indicatif Pass\u00e9 ant\u00e9rieur": {
+            "je": "j'eus \u00e9t\u00e9",
+            "tu": "tu eus \u00e9t\u00e9",
+            "il": "il eut \u00e9t\u00e9",
+            "elle": "elle eut \u00e9t\u00e9",
+            "nous": "nous e\u00fbmes \u00e9t\u00e9",
+            "vous": "vous e\u00fbtes \u00e9t\u00e9",
+            "ils": "ils eurent \u00e9t\u00e9",
+            "elles": "elles eurent \u00e9t\u00e9"
+        },
+        "Indicatif Futur ant\u00e9rieur": {
+            "je": "j'aurai \u00e9t\u00e9",
+            "tu": "tu auras \u00e9t\u00e9",
+            "il": "il aura \u00e9t\u00e9",
+            "elle": "elle aura \u00e9t\u00e9",
+            "nous": "nous aurons \u00e9t\u00e9",
+            "vous": "vous aurez \u00e9t\u00e9",
+            "ils": "ils auront \u00e9t\u00e9",
+            "elles": "elles auront \u00e9t\u00e9"
+        },
+        "Subjonctif Pr\u00e9sent": {
+            "je": "que je sois",
+            "tu": "que tu sois",
+            "il": "qu'il soit",
+            "elle": "qu'elle soit",
+            "nous": "que nous soyons",
+            "vous": "que vous soyez",
+            "ils": "qu'ils soient",
+            "elles": "qu'elles soient"
+        },
+        "Subjonctif Imparfait": {
+            "je": "que je fusse",
+            "tu": "que tu fusses",
+            "il": "qu'il f\u00fbt",
+            "elle": "qu'elle f\u00fbt",
+            "nous": "que nous fussions",
+            "vous": "que vous fussiez",
+            "ils": "qu'ils fussent",
+            "elles": "qu'elles fussent"
+        },
+        "Subjonctif Plus-que-parfait": {
+            "je": "que j'eusse \u00e9t\u00e9",
+            "tu": "que tu eusses \u00e9t\u00e9",
+            "il": "qu'il e\u00fbt \u00e9t\u00e9",
+            "elle": "qu'elle e\u00fbt \u00e9t\u00e9",
+            "nous": "que nous eussions \u00e9t\u00e9",
+            "vous": "que vous eussiez \u00e9t\u00e9",
+            "ils": "qu'ils eussent \u00e9t\u00e9",
+            "elles": "qu'elles eussent \u00e9t\u00e9"
+        },
+        "Subjonctif Pass\u00e9": {
+            "je": "que j'aie \u00e9t\u00e9",
+            "tu": "que tu aies \u00e9t\u00e9",
+            "il": "qu'il ait \u00e9t\u00e9",
+            "elle": "qu'elle ait \u00e9t\u00e9",
+            "nous": "que nous ayons \u00e9t\u00e9",
+            "vous": "que vous ayez \u00e9t\u00e9",
+            "ils": "qu'ils aient \u00e9t\u00e9",
+            "elles": "qu'elles aient \u00e9t\u00e9"
+        },
+        "Conditionnel Pr\u00e9sent": {
+            "je": "je serais",
+            "tu": "tu serais",
+            "il": "il serait",
+            "elle": "elle serait",
+            "nous": "nous serions",
+            "vous": "vous seriez",
+            "ils": "ils seraient",
+            "elles": "elles seraient"
+        },
+        "Conditionnel Pass\u00e9 premi\u00e8re forme": {
+            "je": "j'aurais \u00e9t\u00e9",
+            "tu": "tu aurais \u00e9t\u00e9",
+            "il": "il aurait \u00e9t\u00e9",
+            "elle": "elle aurait \u00e9t\u00e9",
+            "nous": "nous aurions \u00e9t\u00e9",
+            "vous": "vous auriez \u00e9t\u00e9",
+            "ils": "ils auraient \u00e9t\u00e9",
+            "elles": "elles auraient \u00e9t\u00e9"
+        },
+        "Conditionnel Pass\u00e9 deuxi\u00e8me forme": {
+            "je": "j'eusse \u00e9t\u00e9",
+            "tu": "tu eusses \u00e9t\u00e9",
+            "il": "il e\u00fbt \u00e9t\u00e9",
+            "elle": "elle e\u00fbt \u00e9t\u00e9",
+            "nous": "nous eussions \u00e9t\u00e9",
+            "vous": "vous eussiez \u00e9t\u00e9",
+            "ils": "ils eussent \u00e9t\u00e9",
+            "elles": "elles eussent \u00e9t\u00e9"
+        },
+        "Imp\u00e9ratif Pr\u00e9sent": {
+            "tu": "sois",
+            "nous": "soyons",
+            "vous": "soyez"
+        },
+        "Imp\u00e9ratif Pass\u00e9": {
+            "tu": "aie \u00e9t\u00e9",
+            "nous": "ayons \u00e9t\u00e9",
+            "vous": "ayez \u00e9t\u00e9"
+        }
+    }
+}

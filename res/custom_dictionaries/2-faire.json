@@ -1,0 +1,164 @@
+{
+    "faire": {
+        "Indicatif Pr\u00e9sent": {
+            "je": "je fais",
+            "tu": "tu fais",
+            "il": "il fait",
+            "elle": "elle fait",
+            "nous": "nous faisons",
+            "vous": "vous faites",
+            "ils": "ils font",
+            "elles": "elles font"
+        },
+        "Indicatif Imparfait": {
+            "je": "je faisais",
+            "tu": "tu faisais",
+            "il": "il faisait",
+            "elle": "elle faisait",
+            "nous": "nous faisions",
+            "vous": "vous faisiez",
+            "ils": "ils faisaient",
+            "elles": "elles faisaient"
+        },
+        "Indicatif Futur": {
+            "je": "je ferai",
+            "tu": "tu feras",
+            "il": "il fera",
+            "elle": "elle fera",
+            "nous": "nous ferons",
+            "vous": "vous ferez",
+            "ils": "ils feront",
+            "elles": "elles feront"
+        },
+        "Indicatif Pass\u00e9 simple": {
+            "je": "je fis",
+            "tu": "tu fis",
+            "il": "il fit",
+            "elle": "elle fit",
+            "nous": "nous f\u00eemes",
+            "vous": "vous f\u00eetes",
+            "ils": "ils firent",
+            "elles": "elles firent"
+        },
+        "Indicatif Pass\u00e9 compos\u00e9": {
+            "je": "j'ai fait",
+            "tu": "tu as fait",
+            "il": "il a fait",
+            "elle": "elle a fait",
+            "nous": "nous avons fait",
+            "vous": "vous avez fait",
+            "ils": "ils ont fait",
+            "elles": "elles ont fait"
+        },
+        "Indicatif Plus-que-parfait": {
+            "je": "j'avais fait",
+            "tu": "tu avais fait",
+            "il": "il avait fait",
+            "elle": "elle avait fait",
+            "nous": "nous avions fait",
+            "vous": "vous aviez fait",
+            "ils": "ils avaient fait",
+            "elles": "elles avaient fait"
+        },
+        "Indicatif Pass\u00e9 ant\u00e9rieur": {
+            "je": "j'eus fait",
+            "tu": "tu eus fait",
+            "il": "il eut fait",
+            "elle": "elle eut fait",
+            "nous": "nous e\u00fbmes fait",
+            "vous": "vous e\u00fbtes fait",
+            "ils": "ils eurent fait",
+            "elles": "elles eurent fait"
+        },
+        "Indicatif Futur ant\u00e9rieur": {
+            "je": "j'aurai fait",
+            "tu": "tu auras fait",
+            "il": "il aura fait",
+            "elle": "elle aura fait",
+            "nous": "nous aurons fait",
+            "vous": "vous aurez fait",
+            "ils": "ils auront fait",
+            "elles": "elles auront fait"
+        },
+        "Subjonctif Pr\u00e9sent": {
+            "je": "que je fasse",
+            "tu": "que tu fasses",
+            "il": "qu'il fasse",
+            "elle": "qu'elle fasse",
+            "nous": "que nous fassions",
+            "vous": "que vous fassiez",
+            "ils": "qu'ils fassent",
+            "elles": "qu'elles fassent"
+        },
+        "Subjonctif Imparfait": {
+            "je": "que je fisse",
+            "tu": "que tu fisses",
+            "il": "qu'il f\u00eet",
+            "elle": "qu'elle f\u00eet",
+            "nous": "que nous fissions",
+            "vous": "que vous fissiez",
+            "ils": "qu'ils fissent",
+            "elles": "qu'elles fissent"
+        },
+        "Subjonctif Plus-que-parfait": {
+            "je": "que j'eusse fait",
+            "tu": "que tu eusses fait",
+            "il": "qu'il e\u00fbt fait",
+            "elle": "qu'elle e\u00fbt fait",
+            "nous": "que nous eussions fait",
+            "vous": "que vous eussiez fait",
+            "ils": "qu'ils eussent fait",
+            "elles": "qu'elles eussent fait"
+        },
+        "Subjonctif Pass\u00e9": {
+            "je": "que j'aie fait",
+            "tu": "que tu aies fait",
+            "il": "qu'il ait fait",
+            "elle": "qu'elle ait fait",
+            "nous": "que nous ayons fait",
+            "vous": "que vous ayez fait",
+            "ils": "qu'ils aient fait",
+            "elles": "qu'elles aient fait"
+        },
+        "Conditionnel Pr\u00e9sent": {
+            "je": "je ferais",
+            "tu": "tu ferais",
+            "il": "il ferait",
+            "elle": "elle ferait",
+            "nous": "nous ferions",
+            "vous": "vous feriez",
+            "ils": "ils feraient",
+            "elles": "elles feraient"
+        },
+        "Conditionnel Pass\u00e9 premi\u00e8re forme": {
+            "je": "j'aurais fait",
+            "tu": "tu aurais fait",
+            "il": "il aurait fait",
+            "elle": "elle aurait fait",
+            "nous": "nous aurions fait",
+            "vous": "vous auriez fait",
+            "ils": "ils auraient fait",
+            "elles": "elles auraient fait"
+        },
+        "Conditionnel Pass\u00e9 deuxi\u00e8me forme": {
+            "je": "j'eusse fait",
+            "tu": "tu eusses fait",
+            "il": "il e\u00fbt fait",
+            "elle": "elle e\u00fbt fait",
+            "nous": "nous eussions fait",
+            "vous": "vous eussiez fait",
+            "ils": "ils eussent fait",
+            "elles": "elles eussent fait"
+        },
+        "Imp\u00e9ratif Pr\u00e9sent": {
+            "tu": "fais",
+            "nous": "faisons",
+            "vous": "faites"
+        },
+        "Imp\u00e9ratif Pass\u00e9": {
+            "tu": "aie fait",
+            "nous": "ayons fait",
+            "vous": "ayez fait"
+        }
+    }
+}
