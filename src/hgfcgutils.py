@@ -1,6 +1,7 @@
 import shutil
 import os
 import contextlib
+import colorama as clr
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -95,17 +96,26 @@ def print_centered_hline(pattern='-', w_pcnt_screen=1.0, above_space=0, below_sp
     line_width = int(sh_w * w_pcnt_screen)
 
     # TODO: pending to make it work
-    # print(f"'\n'*above_space"
-    #       f"{f'{pattern * line_width}':{sh_w}}"
-    #       f"{f'\n' * below_space}")
+    print('\n' * above_space, end='')
     print(f"{f'{pattern * line_width}':^{sh_w}}")
+    print('\n' * below_space, end='')
 
 
-def print_centered_msg(msg, downsize=0):
+def print_centered_msg(msg, end='\n', place_cursor=False, cursor_offset=0):
     # Request the size of the shell everytime just in case the user resized in the middle of the game
     sh_w, sh_h = shutil.get_terminal_size()
 
-    print(f"{msg:^{sh_w}}")
+    print(f"{msg:^{sh_w}}", end=end)
+
+    if place_cursor:
+        print(clr.ansi.Cursor.BACK((sh_w // 2) - (len(msg) // 2) + cursor_offset), end="")
+
+
+def input_centered_msg(msg):
+    # Request the size of the shell everytime just in case the user resized in the middle of the game
+    sh_w, sh_h = shutil.get_terminal_size()
+
+    return input(f"{msg:^{sh_w}}")
 
 # TODO: Turn this into UTs
 # Testing my recursive function go extract the index where the person of the verb finishes

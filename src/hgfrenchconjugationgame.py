@@ -2,29 +2,16 @@ import logging
 import os
 import random
 import colorama as clr
-import contextlib
 import shutil
 import hgfcgutils
+import ctypes
+
 try:
     import simplejson as json
 except ImportError:
     import json
 
 logging.basicConfig(level=logging.INFO)
-
-init_msg_special = "\n" + \
-                   "-----------------------------------------------------------------\n" + \
-                   "  Conjugaison verbe Français\n" + \
-                   "-----------------------------------------------------------------\n" + \
-                   " Please select either a special set or build your own:\n" + \
-                   "  {:<30s} {:<30s} {:<30s}\n".format("1 Tous les Infinitifs", "2 Tous les Subjonctifs",
-                                                        "3 Tous les Conditionnels") + \
-                   "  {:<30s} {:<30s} {:<30s}\n".format("11 Indicatif Présent", "21 Subjonctif Présent",
-                                                        "31 Conditionnel Présent") + \
-                   "  {:<30s} {:<30s} {:<30s}\n".format("12 Indicatif Imparfait", "22 Subjonctif Imparfait",
-                                                        "32 Conditionnel Passé première forme") + \
-                   "  5. HG selection\n\n" \
-                   "Your choice: "
 
 
 class FrenchConjugationGame:
@@ -84,13 +71,17 @@ class FrenchConjugationGame:
         # Clear the screen before start
         print(clr.ansi.clear_screen(), end="")
 
-        raw_input = input(init_msg_special)
+        self._display_options_screen()
+        raw_input = input()
 
         options, error_message = self._process_raw_input_options(raw_input)
 
         if options is not None:
             if len(options) > 0:
-                confirmation = input(f"You selected: {options}. Is this OK? [y]/n: ")
+                msg = f"You selected: {list(options)}. Is this OK? [y]/n: "
+                hgfcgutils.print_centered_msg(f"{msg:<{len(msg) + 1}}", end='', place_cursor=True)
+
+                confirmation = input()
 
                 if confirmation != "n":
                     self.start_game(options)
@@ -125,6 +116,118 @@ class FrenchConjugationGame:
     # -------------------------------------------------------
     #  Helper functions
     # -------------------------------------------------------
+    def _display_options_screen(self):
+        col1_w = 35
+        col2_w = 35
+        col3_w = 40
+
+        #
+        #  Code for left-aligned text
+        # -------------------------------------------------------------
+        # print(f"{' ' * self._indent}{'-' * 80}\n")
+        # print(f"{' ' * self._indent}The French Conjugation Game\n")
+        # print(f"{' ' * self._indent}{'-' * 80}\n")
+
+        # print(
+        #     f"{' ' * self._indent}Select one of the general options (single digit option) or build your own set using\n"
+        #     f"{' ' * self._indent}the individual tenses (double digit option) separated by commas.\n"
+        #     #f"{' ' * self._indent}\n"
+        # )
+
+        # static_opts_list_str = "\n" \
+        #                        f"{' ' * self._indent}{'1 Tous les Indicatifs':<{col1_w}} {'2 Tous les Subjonctifs':<{col2_w}} {'3 Tous les Conditionnels':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'11 {self.OPTIONS_DICTIONARY[11]}':<{col1_w}} {f'21 {self.OPTIONS_DICTIONARY[21]}':<{col2_w}} {f'31 {self.OPTIONS_DICTIONARY[31]}':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'12 {self.OPTIONS_DICTIONARY[12]}':<{col1_w}} {f'22 {self.OPTIONS_DICTIONARY[22]}':<{col2_w}} {f'32 {self.OPTIONS_DICTIONARY[32]}':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'13 {self.OPTIONS_DICTIONARY[13]}':<{col1_w}} {f'23 {self.OPTIONS_DICTIONARY[23]}':<{col2_w}} {f'33 {self.OPTIONS_DICTIONARY[33]}':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'14 {self.OPTIONS_DICTIONARY[14]}':<{col1_w}} {f'24 {self.OPTIONS_DICTIONARY[24]}':<{col2_w}} {f'':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'15 {self.OPTIONS_DICTIONARY[15]}':<{col1_w}} {f'':<{col2_w}} {f'4 Tous les Impératifs':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'16 {self.OPTIONS_DICTIONARY[16]}':<{col1_w}} {f'':<{col2_w}} {f'41 {self.OPTIONS_DICTIONARY[41]}':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'17 {self.OPTIONS_DICTIONARY[17]}':<{col1_w}} {f'':<{col2_w}} {f'42 {self.OPTIONS_DICTIONARY[42]}':<{col3_w}}\n" \
+        #                        f"{' ' * self._indent}{f'18 {self.OPTIONS_DICTIONARY[18]}':<{col1_w}} {f'':<{col2_w}} {f'':<{col3_w}}\n\n"
+        # custom_opts_str = f"{' ' * self._indent}5. HG selection\n"
+        #
+        # print(static_opts_list_str)
+        # print(f"{' ' * (self._indent-4)}Your selection: ", end='')
+
+        #
+        #  Code for center-aligned text
+        # -------------------------------------------------------------
+        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5, above_space=1, below_space=1)
+        hgfcgutils.print_centered_msg("The French Conjugation Game")
+        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5, above_space=1, below_space=1)
+
+        instructions_msg_pt1 = "Select one of the general options (single digit option) or build your own set using"
+        instructions_msg_pt2 = "the individual tenses (double digit option) separated by commas."
+
+        hgfcgutils.print_centered_msg(instructions_msg_pt1)
+        hgfcgutils.print_centered_msg(instructions_msg_pt2)
+
+        print("\n")
+
+        hgfcgutils.print_centered_msg(f"{'1 Tous les Indicatifs':<{col1_w}} "
+                                      f"{'2 Tous les Subjonctifs':<{col2_w}} "
+                                      f"{'3 Tous les Conditionnels':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'11 {self.OPTIONS_DICTIONARY[11]}':<{col1_w}} "
+                                      f"{f'21 {self.OPTIONS_DICTIONARY[21]}':<{col2_w}} "
+                                      f"{f'31 {self.OPTIONS_DICTIONARY[31]}':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'12 {self.OPTIONS_DICTIONARY[12]}':<{col1_w}} "
+                                      f"{f'22 {self.OPTIONS_DICTIONARY[22]}':<{col2_w}} "
+                                      f"{f'32 {self.OPTIONS_DICTIONARY[32]}':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'13 {self.OPTIONS_DICTIONARY[13]}':<{col1_w}} "
+                                      f"{f'23 {self.OPTIONS_DICTIONARY[23]}':<{col2_w}} "
+                                      f"{f'33 {self.OPTIONS_DICTIONARY[33]}':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'14 {self.OPTIONS_DICTIONARY[14]}':<{col1_w}} "
+                                      f"{f'24 {self.OPTIONS_DICTIONARY[24]}':<{col2_w}} "
+                                      f"{f'':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'15 {self.OPTIONS_DICTIONARY[15]}':<{col1_w}} "
+                                      f"{f'':<{col2_w}} "
+                                      f"{f'4 Tous les Impératifs':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'16 {self.OPTIONS_DICTIONARY[16]}':<{col1_w}} "
+                                      f"{f'':<{col2_w}} "
+                                      f"{f'41 {self.OPTIONS_DICTIONARY[41]}':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'17 {self.OPTIONS_DICTIONARY[17]}':<{col1_w}} "
+                                      f"{f'':<{col2_w}} "
+                                      f"{f'42 {self.OPTIONS_DICTIONARY[42]}':<{col3_w}}")
+        hgfcgutils.print_centered_msg(f"{f'18 {self.OPTIONS_DICTIONARY[18]}':<{col1_w}} "
+                                      f"{f'':<{col2_w}} "
+                                      f"{f'':<{col3_w}}")
+
+        print("\n")
+
+        hgfcgutils.print_centered_msg(f"{f'5 HG Selection':<{col1_w}} {f'':<{col2_w}} {f'':<{col3_w}}")
+
+        print("\n")
+
+        input_msg = f"Your selection: "
+        hgfcgutils.print_centered_msg(f"{input_msg:<{len(input_msg) + 1}}", end='', place_cursor=True)
+
+        # input_msg = f"{f'Your selection: ':<{col1_w}}"
+        # hgfcgutils.print_centered_msg(input_msg, end='')
+
+        # sh_w, sh_h = shutil.get_terminal_size()
+
+        # print(clr.ansi.Cursor.BACK((sh_w // 2) - (len(input_msg) // 2) + (input_msg.rfind(":")) ), end="")
+
+        # hgfcgutils.input_centered_msg(f"{f'Your seletion: ':<{col1_w}}")
+
+        # class COORD(ctypes.Structure):
+        #     pass
+        #
+        # COORD._fields_ = [("X", ctypes.c_short), ("Y", ctypes.c_short)]
+        #
+        # sh_w, sh_h = shutil.get_terminal_size()
+        #
+        # STD_OUTPUT_HANDLE = -11
+        # r = 20
+        # c = (sh_w // 2) + 3
+        # h = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
+        # ctypes.windll.kernel32.SetConsoleCursorPosition(h, COORD(c, r))
+
+        # cursor = clr.Cursor.POS((sh_w // 2) + 3, 19)
+        # print(clr.Cursor.POS((sh_w // 2) + 3, 20), end='')
+        #
+        # -------------------------------------------------------------
+
     def _display_question_screen(self, person, verb, verb_time):
         print(clr.ansi.clear_screen(), end="")
 
@@ -199,13 +302,13 @@ class FrenchConjugationGame:
             if self.nb_wrong_answers > 4:
                 # Wait for an input to take a look at the correct response of the final try.
                 print(f"{clr.Style.BRIGHT}", end="")
-                hgfcgutils.print_centered_msg(f"{' '*self._indent}You ran out of tries. Press [enter] to continue.")
+                hgfcgutils.print_centered_msg(f"{' ' * self._indent}You ran out of tries. Press [enter] to continue.")
                 print(f"{clr.Style.DIM}", end="")
 
                 input()
                 self.end_game(preamble="You're almost there. Keep practicing!")
             else:
-                continue_ans = input(f"\n{' '*self._indent}Continue? [y]/n: ")
+                continue_ans = input(f"\n{' ' * self._indent}Continue? [y]/n: ")
                 if continue_ans == 'n':
                     self.end_game()
 
