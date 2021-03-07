@@ -188,12 +188,12 @@ class FrenchConjugationGame:
             if raw_input == self.dictionary[verb][verb_time][person]:
                 self.nb_correct_answers += 1
                 print(f"{clr.Style.BRIGHT}{clr.Fore.GREEN}", end="")
-                print(f"{' '*self._indent}{self.dictionary[verb][verb_time][person]}")
+                print(f"{' ' * self._indent}{self.dictionary[verb][verb_time][person]} \u2713")
                 print(f"{clr.Style.RESET_ALL}", end="")
             else:
                 self.nb_wrong_answers += 1
                 print(f"{clr.Style.BRIGHT}{clr.Fore.RED}", end="")
-                print(f"{' '*self._indent}{self.dictionary[verb][verb_time][person]}")
+                print(f"{' ' * self._indent}{self.dictionary[verb][verb_time][person]} \u2717")
                 print(f"{clr.Style.RESET_ALL}", end="")
 
             if self.nb_wrong_answers > 4:
