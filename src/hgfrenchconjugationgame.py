@@ -71,6 +71,9 @@ class FrenchConjugationGame:
         # Clear the screen before start
         print(clr.ansi.clear_screen(), end="")
 
+        # Set the title of the app
+        print(clr.ansi.set_title("The French Conjugation Game"))
+
         self._display_options_screen()
         raw_input = input()
 
@@ -119,7 +122,7 @@ class FrenchConjugationGame:
     def _display_options_screen(self):
         col1_w = 35
         col2_w = 35
-        col3_w = 40
+        col3_w = 36
 
         #
         #  Code for left-aligned text
