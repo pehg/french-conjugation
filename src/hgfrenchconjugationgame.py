@@ -82,7 +82,8 @@ class FrenchConjugationGame:
         if options is not None:
             if len(options) > 0:
                 msg = f"You selected: {list(options)}. Is this OK? [y]/n: "
-                hgfcgutils.print_centered_msg(f"{msg:<{len(msg) + 1}}", end='', place_cursor=True)
+                # hgfcgutils.print_centered_msg(f"{msg:<{len(msg) + 1}}", end='', place_cursor=True)
+                hgfcgutils.print_centered_msg_better(msg, end="")
 
                 confirmation = input()
 
@@ -108,7 +109,22 @@ class FrenchConjugationGame:
 
                 # Display the person, so the user focuses only in conjugating the verb
                 _, p_str = hgfcgutils.get_person_str(verb_time, self.dictionary[verb][verb_time][person])
-                raw_input = input(f"{' ' * self._indent}{p_str}")
+                # raw_input = input(f"{' ' * self._indent}{p_str}")
+
+                # msg = f"{p_str:<{len(self.dictionary[verb][verb_time][person])}}"
+
+                # msg = self.dictionary[verb][verb_time][person]
+                # hgfcgutils.prepare_cursor_forward_centered_text(msg)
+                # print(p_str, end="")
+                hgfcgutils.print_centered_msg_better(p_str,
+                                                     msg_len=len(self.dictionary[verb][verb_time][person]),
+                                                     end="")
+
+                # hgfcgutils.print_centered_msg(msg, end='', place_cursor=True, cursor_offset=len(p_str))
+
+                # msg = f"{self.dictionary[verb][verb_time][person]:<{len(self.dictionary[verb][verb_time][person])+1}}"
+                # hgfcgutils.print_centered_msg(msg, end='')
+                raw_input = input()
 
                 self._evaluate_answer(verb, verb_time, person, raw_input, p_str)
 
@@ -202,7 +218,9 @@ class FrenchConjugationGame:
         print("\n")
 
         input_msg = f"Your selection: "
-        hgfcgutils.print_centered_msg(f"{input_msg:<{len(input_msg) + 1}}", end='', place_cursor=True)
+        space_for_options = 6
+        # hgfcgutils.print_centered_msg(f"{input_msg:<{len(input_msg) + 1}}", end='', place_cursor=True)
+        hgfcgutils.print_centered_msg_better(input_msg, msg_len=len(input_msg) + space_for_options, end="")
 
         # input_msg = f"{f'Your selection: ':<{col1_w}}"
         # hgfcgutils.print_centered_msg(input_msg, end='')
@@ -235,17 +253,37 @@ class FrenchConjugationGame:
         print(clr.ansi.clear_screen(), end="")
 
         # Add some vertical space
-        print("\n\n")
+        # print("\n\n")
+        #
+        # print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+        #
+        # question_text = f"{' ' * self._indent}{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n" \
+        #                 f"{' ' * self._indent}{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+        #                 f"{' ' * self._indent}{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n"
+        #
+        # print(question_text)
+        #
+        # print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
 
-        print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+        #
+        #  Code for center-aligned text
+        # -------------------------------------------------------------
+        box_w = 60
+        hline = '-' * box_w
+        print("\n")
+        hgfcgutils.print_centered_msg(f"{hline:<{box_w}}", end="\n\n")
 
-        question_text = f"{' ' * self._indent}{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n" \
-                        f"{' ' * self._indent}{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
-                        f"{' ' * self._indent}{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n"
+        person_part = f" personne:   {person}"
+        verb_part = f" verbe:      {verb}"
+        tense_part = f" mode-temps: {verb_time}"
 
-        print(question_text)
+        hgfcgutils.print_centered_msg(f"{person_part:<{box_w // 2}}")
+        hgfcgutils.print_centered_msg(f"{verb_part:<{box_w // 2}}")
+        hgfcgutils.print_centered_msg(f"{tense_part:<{box_w // 2}}", end="\n\n")
 
-        print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+        hgfcgutils.print_centered_msg(f"{hline:<{box_w}}")
+        #
+        # -------------------------------------------------------------
 
     def _display_end_screen(self, preamble=None, error_msg=None):
         print(clr.ansi.clear_screen(), end="")
@@ -277,7 +315,8 @@ class FrenchConjugationGame:
         print(f"{clr.Style.RESET_ALL}", end="")
 
         hgfcgutils.print_centered_hline(w_pcnt_screen=0.5)
-        hgfcgutils.print_centered_msg("Press [enter] to quit")
+        # hgfcgutils.print_centered_msg("Press [enter] to quit.", end="", place_cursor=True)
+        hgfcgutils.print_centered_msg_better("Press [enter] to quit.", end="")
 
         # Wait for an input to finish the game and clear the screen before getting out of the app
         input()
@@ -291,27 +330,39 @@ class FrenchConjugationGame:
             self.end_game("You exit the game")
         else:
             raw_input = f"{person_str}{raw_input}"
+            symbol = ""
+
             if raw_input == self.dictionary[verb][verb_time][person]:
                 self.nb_correct_answers += 1
                 print(f"{clr.Style.BRIGHT}{clr.Fore.GREEN}", end="")
-                print(f"{' ' * self._indent}{self.dictionary[verb][verb_time][person]} \u2713")
-                print(f"{clr.Style.RESET_ALL}", end="")
+                symbol = "\u2713"
             else:
                 self.nb_wrong_answers += 1
                 print(f"{clr.Style.BRIGHT}{clr.Fore.RED}", end="")
-                print(f"{' ' * self._indent}{self.dictionary[verb][verb_time][person]} \u2717")
-                print(f"{clr.Style.RESET_ALL}", end="")
+                symbol = "\u2717"
+
+            # hgfcgutils.print_centered_msg(f"{self.dictionary[verb][verb_time][person]}", end='', place_cursor=True)
+            hgfcgutils.print_centered_msg_better(self.dictionary[verb][verb_time][person], end="")
+            print(f" {symbol}")
+
+            print(f"{clr.Style.RESET_ALL}", end="")
 
             if self.nb_wrong_answers > 4:
                 # Wait for an input to take a look at the correct response of the final try.
                 print(f"{clr.Style.BRIGHT}", end="")
-                hgfcgutils.print_centered_msg(f"{' ' * self._indent}You ran out of tries. Press [enter] to continue.")
-                print(f"{clr.Style.DIM}", end="")
+                # hgfcgutils.print_centered_msg(f"{' ' * self._indent}You ran out of tries. Press [enter] to continue.")
+                # hgfcgutils.print_centered_msg("You ran out of tries. Press [enter] to continue.", end='', place_cursor=True)
+                hgfcgutils.print_centered_msg_better("You ran out of tries. Press [enter] to continue.", end='')
+                print(f"{clr.Style.RESET_ALL}", end="")
 
                 input()
                 self.end_game(preamble="You're almost there. Keep practicing!")
             else:
-                continue_ans = input(f"\n{' ' * self._indent}Continue? [y]/n: ")
+                # continue_ans = input(f"\n{' ' * self._indent}Continue? [y]/n: ")
+                # hgfcgutils.print_centered_msg("Continue? [y]/n: ", end='', place_cursor=True)
+                hgfcgutils.print_centered_msg_better("Continue? [y]/n: ", end='')
+                continue_ans = input()
+
                 if continue_ans == 'n':
                     self.end_game()
 

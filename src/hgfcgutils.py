@@ -111,11 +111,37 @@ def print_centered_msg(msg, end='\n', place_cursor=False, cursor_offset=0):
         print(clr.ansi.Cursor.BACK((sh_w // 2) - (len(msg) // 2) + cursor_offset), end="")
 
 
-def input_centered_msg(msg):
+def print_centered_msg_better(msg, msg_len=-1, end="\n", cursor_offset=0):
+    """
+    Print the string "msg" centered in the current line in the console.
+
+    Args:
+        msg (str): String to be printed at the center of the current line in the console.
+        msg_len (int, opt): In case that the length of the message is not the same as the space required (can be used to
+                            partially write a text that will be filled later but we want the final expression to be
+                            centered.
+        end (str, opt): Character to print at the end of the message. Passed directly to print()
+        cursor_offset (int, opt): Similar to msg_len.
+
+    Returns:
+        None
+
+    Notes:
+        It assumes that the cursor is positioned at the beginning on the current line.
+        I consider this a better version of "print_centered_msg" since it doesn't fill with blanks the right side of the
+        text printed, thus, if end="", you can continue writing next to the centered text.
+    """
     # Request the size of the shell everytime just in case the user resized in the middle of the game
     sh_w, sh_h = shutil.get_terminal_size()
 
-    return input(f"{msg:^{sh_w}}")
+    # Place the cursor at the correct position to print the centered message
+    if msg_len == -1:
+        print(clr.ansi.Cursor.FORWARD(int(sh_w / 2 - len(msg) / 2) + cursor_offset), end="")
+    else:
+        print(clr.ansi.Cursor.FORWARD(int(sh_w / 2 - msg_len / 2) + cursor_offset), end="")
+
+    print(msg, end=end)
+
 
 # TODO: Turn this into UTs
 # Testing my recursive function go extract the index where the person of the verb finishes
