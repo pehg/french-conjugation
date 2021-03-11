@@ -1,4 +1,6 @@
 TODO List
+[Feature] Select a range of verbs based on their rank
+
 [Feature] Add an option to create your own list of verbs.
     - This option has to be displayed before getting into the temps and mode screen.
     - Allow saving this list to a file. So users can load it later.
@@ -18,6 +20,120 @@ TODO List
   side with blanks depending on the size of the screen.
 
 [Bug] Using relative paths to find the files to read is causing a problem
+
+
+
+
+Here are some other UI styles for the question screen
+
+                # self._print_centered_hline(w_pcnt_screen=0.5)
+                # question_text = f"{clr.Style.BRIGHT}" \
+                #                 f" verbe:      {verb}\n" \
+                #                 f" personne:   {person}\n" \
+                #                 f" mode-temps: {verb_time}\n" \
+                #                 f"{clr.Style.RESET_ALL}"
+                #
+                # question_text = f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
+                #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n" \
+                #                 f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n"
+                #
+                # question_text = f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n" \
+                #                 f"{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+                #                 f"{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n"
+                #
+                # question_text = f" mode-temps: {clr.Style.BRIGHT}{verb_time}{clr.Style.DIM}\n" \
+                #                 f" verbe:      {clr.Style.BRIGHT}{verb}{clr.Style.DIM}\n" \
+                #                 f" personne:   {clr.Style.BRIGHT}{person}{clr.Style.DIM}\n"
+                # self._print_centered_msg(f"{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}")
+                # self._print_centered_msg(f"{clr.Style.BRIGHT}verbe: {clr.Style.DIM}{verb}")
+                # self._print_centered_msg(f"{clr.Style.BRIGHT}personne: {clr.Style.DIM}{person}")
+
+                # self._print_centered_msg(f"mode-temps: {verb_time}")
+                # self._print_centered_msg(f"verbe: {verb}")
+                # self._print_centered_msg(f"personne: {person}")
+                # self._print_centered_hline(w_pcnt_screen=0.5)
+
+
+
+
+"j'étais",
+"tu étais"
+"il s'étais",
+"qu'elle étais"
+"qu'elle s'étais"
+"que nous nous avions"
+"que vous vous aviez"
+"je suis arrivé"
+"j'avais arrivé"
+
+[["j'", "étais"], ["tu ", "t'étais"], ["qu'il ", "s'étais"]]
+
+
+
+
+    def start_game(self, options):
+        verb_times_list = self._create_options_list(options)
+
+        # Load the dictionary into memory. If this fails, it will end the game automatically
+        self._load_dictionary()
+
+        if self.dictionary is not None:
+            self.game_ongoing = True
+            verb_list = list(self.dictionary.keys())
+
+            while self.game_ongoing:
+                verb, verb_time, person = self._get_components_question(verb_list, verb_times_list)
+
+                self._display_question_screen(person, verb, verb_time)
+
+                # Display the person, so the user focuses only in conjugating the verb
+                _, p_str = hgfcgutils.get_person_str(verb_time, self.dictionary[verb][verb_time][person])
+                # raw_input = input(f"{' ' * self._indent}{p_str}")
+
+                msg = f"{p_str:<{len(self.dictionary[verb][verb_time][person]) - len(p_str)}}"
+                hgfcgutils.print_centered_msg(msg, end='', place_cursor=True)
+                raw_input = input()
+
+                self._evaluate_answer(verb, verb_time, person, raw_input, p_str)
+
+
+    def _display_question_screen(self, person, verb, verb_time):
+        print(clr.ansi.clear_screen(), end="")
+
+        # Add some vertical space
+        # print("\n\n")
+        #
+        # print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+        #
+        # question_text = f"{' ' * self._indent}{clr.Style.BRIGHT}personne:   {clr.Style.DIM}{person}\n" \
+        #                 f"{' ' * self._indent}{clr.Style.BRIGHT}verbe:      {clr.Style.DIM}{verb}\n" \
+        #                 f"{' ' * self._indent}{clr.Style.BRIGHT}mode-temps: {clr.Style.DIM}{verb_time}\n"
+        #
+        # print(question_text)
+        #
+        # print(f"{' ' * (self._indent - 1)}{'-' * 40}\n")
+
+        #
+        #  Code for center-aligned text
+        # -------------------------------------------------------------
+        box_w = 60
+        hline = '-' * box_w
+        print("\n")
+        hgfcgutils.print_centered_msg(f"{hline:<{box_w}}", end="\n\n")
+
+        person_part = f" personne:   {person}"
+        verb_part = f" verbe:      {verb}"
+        tense_part = f" mode-temps: {verb_time}"
+
+        hgfcgutils.print_centered_msg(f"{person_part:<{box_w // 2}}")
+        hgfcgutils.print_centered_msg(f"{verb_part:<{box_w // 2}}")
+        hgfcgutils.print_centered_msg(f"{tense_part:<{box_w // 2}}", end="\n\n")
+
+        hgfcgutils.print_centered_msg(f"{hline:<{box_w}}")
+        #
+        # -------------------------------------------------------------
+
+
 
 
 
