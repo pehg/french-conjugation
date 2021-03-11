@@ -304,7 +304,7 @@ class FrenchConjugationGame:
 
         hgfcgutils.print_centered_msg('Summary')
 
-        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5)
+        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5, above_space=1, below_space=1)
 
         if total:
             hgfcgutils.print_centered_msg(f'Correct answers: {self.nb_correct_answers}/{total}')
@@ -314,7 +314,7 @@ class FrenchConjugationGame:
 
         print(f"{clr.Style.RESET_ALL}", end="")
 
-        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5)
+        hgfcgutils.print_centered_hline(w_pcnt_screen=0.5, above_space=1, below_space=1)
         # hgfcgutils.print_centered_msg("Press [enter] to quit.", end="", place_cursor=True)
         hgfcgutils.print_centered_msg_better("Press [enter] to quit.", end="")
 
